@@ -1,17 +1,20 @@
-- name: Create an EKS cluster
-  aws_eks_cluster:
-    name: my_cluster
-    version: v1.10.0
-    role_arn: my_eks_role
-    subnets:
-      - subnet-aaaa1111
-    security_groups:
-      - my_eks_sg
-      - sg-abcd1234
-  register: caller_facts
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Import VPC Variables
+      include_vars: vars/vpc_setup
 
-- name: Remove an EKS cluster
-  aws_eks_cluster:
-    name: my_cluster
-    wait: yes
-    state: absent
+    - name: Create an EKS cluster
+      aws_eks_cluster:
+         name: my_cluster
+         version: v1.10.0
+         region: "{{region}}"
+         role_arn: my_eks_role
+         subnets:
+            - subnet-aaaa1111
+         security_groups:
+            - my_eks_sg
+            - sg-abcd1234
+      register: caller_facts
+
