@@ -8,13 +8,19 @@
     - name: Create an EKS cluster
       aws_eks_cluster:
          name: my_cluster
-         version: v1.10.0
          region: "{{region}}"
-         role_arn: my_eks_role
+         role_arn: arn:aws:iam::622897596075:role/ansible-eks
          subnets:
-            - subnet-aaaa1111
+            - subnet-c36603b8
+            - subnet-34aefd78
          security_groups:
-            - my_eks_sg
-            - sg-abcd1234
+            - sg-0bf7f6c1adceb585f
       register: caller_facts
-
+    - ec2:
+         key_name: ansible-key
+         instance_type: t2.micro
+         image: ami-041d6256ed0f2061c
+         count: 2
+         region: "{{region}}"
+         assign_public_ip: yes
+         vpc_subnet_id: subnet-e4bf528f
