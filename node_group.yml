@@ -1,0 +1,12 @@
+eks_worker:
+  stack_name: my_cluster_stack
+  role_name: arn:aws:iam::622897596075:instance-profile/ansible_eks_work_nde
+  nodegroup_name: mynode_group
+  autoscaling_min_size: 1
+  autoscaling_max_size: 2
+  autoscaling_desired_size: 2
+  instance_type: t2.micro
+  image_id: ami-041d6256ed0f2061c 
+  volume_size: 20
+  key_name: ansible-key
+  bootstrap_args: ""
