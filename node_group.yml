@@ -10,3 +10,4 @@ eks_worker:
   volume_size: 20
   key_name: ansible-key
   bootstrap_args: ""
+  
